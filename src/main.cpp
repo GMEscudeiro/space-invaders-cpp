@@ -56,12 +56,14 @@ void Game::processEvents() {
 
 void Game::update(sf::Time delta) {
   player.update(delta);
+  player.updateBullets(delta, window.getSize());
 }
 
 void Game::render() {
     window.clear();
 
     player.draw(window);
+    player.drawBullets(window);
 
     window.display();
 }

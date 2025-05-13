@@ -17,6 +17,9 @@ void Player::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         shape.move(speed * 0.016f, 0.f); // Move right (scaled by delta time)
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        shoot(); // Call shoot function when space is pressed
+    }
 }
 
 void Player::update(sf::Time deltaTime) {
@@ -53,3 +56,29 @@ sf::Vector2f Player::getPosition() const {
     return shape.getPosition();
 }
 
+void Player::shoot() {
+  if(shootTimer.getElapsedTime().asSeconds() >= shootCooldown) {
+      sf::Vector2f bulletPos(shape.getPosition().x + shape.getSize().x / 2 - 2.5f, shape.getPosition().y); // Center the bullet
+    bullets.emplace_back(bulletPos); // Create a new bullet
+    shootTimer.restart();
+  }
+}
+
+void Player::updateBullets(sf::Time deltaTime, sf::Vector2u windowSize) {
+  for(auto& bullet : bullets) {
+    bullet.update(deltaTime);
+  }
+  bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [windowSize](const Bullet& bullet) {
+    return bullet.isOffScreen(windowSize.y);
+  }), bullets.end());
+}
+
+void Player::drawBullets(sf::RenderWindow& window) const {
+  for(const auto& bullet : bullets) {
+    bullet.draw(window);
+  }
+}
+
+const std::vector<Bullet>& Player::getBullets() const {
+  return bullets;
+}

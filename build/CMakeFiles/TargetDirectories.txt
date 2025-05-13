@@ -1,3 +1,0 @@
-/home/noob/my_game/build/CMakeFiles/SpaceInvaders.dir
-/home/noob/my_game/build/CMakeFiles/edit_cache.dir
-/home/noob/my_game/build/CMakeFiles/rebuild_cache.dir

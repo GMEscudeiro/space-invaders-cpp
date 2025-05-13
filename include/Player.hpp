@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
+#include "Bullet.hpp"
 class Player {
 public:
     Player(const sf::Vector2u& windowSize); // Constructor to initialize player
@@ -9,6 +11,10 @@ public:
     void handleInput();                   // Handle player input
     void update(sf::Time deltaTime);      // Update player state
     void draw(sf::RenderWindow& window);  // Draw player on screen
+    void shoot();
+    void updateBullets(sf::Time deltaTime, sf::Vector2u windowSize); // Update bullets
+    void drawBullets(sf::RenderWindow& window) const;
+    const std::vector<Bullet>& getBullets() const; // Get bullets for collision detection
 
     // Getter for player bounds (for collision)
     sf::FloatRect getBounds() const;
@@ -16,11 +22,13 @@ public:
     // Optional: set/reset position
     void setPosition(const sf::Vector2f& pos);
     sf::Vector2f getPosition() const;
-    sf::Vector2u windowSize;
 
 private:
     sf::RectangleShape shape;             // Visual representation
     float speed;                          // Movement speed
-    // Add more private members as needed (e.g., texture, health)
+    sf::Vector2u windowSize;
+    std::vector<Bullet> bullets; // Store bullets
+    sf::Clock shootTimer; // Clock to manage bullet timing
+    float shootCooldown = 0.3f; // Cooldown time in seconds
 };
 
