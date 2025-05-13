@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/SpaceInvaders.dir/src/Player.cpp.o CMakeFiles/SpaceInvaders.dir/src/main.cpp.o -o SpaceInvaders  /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-audio.so.2.5.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1 
